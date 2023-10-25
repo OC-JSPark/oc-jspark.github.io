@@ -394,7 +394,37 @@ comments: true
 
 
 
-ResNet
+# 6. ResNet
+
+## 6-1. revolution of depth(깊이의 혁명)
+
+![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/5ce6403f-a702-4282-b1fa-7c4754a8eb07)
+
+  - depth는 중요한 요소이다
+  - depth가 깊어질수록 receptive fiels(수용자)가 커진다. semantic 한 concept를 큰 context에서 알아낼수 있다.
+  - 또한, 더 깊어질수록 non-linear function이 더 중첩되기 때문에 더 큰 non-linearities를 얻을수 있다. 그래서 더 richer하고 complicated한 feature space를 모델링할수 있는 기법을 제공해준다
+
+  - alexnet은 8 layer.
+  - vgg는 19 layer
+  - ResNet 152 layer까지 쌓을수 있는 방식이 생김
+
+![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/8ae49d3b-f9cb-4372-b9b3-af6a5faeda74)
+
+  - 네트워크를 깊게쌓는것의 문제점은 backward gradient, forward response가 너무 쉽게 사라지거나 폭발한다는점.
+  - 이걸 더 쉽게 쌓는걸 가능하게 한점은?
+    1. ReLU activation : sigmoid activation은 끝으로 갈수록 gradient가 작아진다
+    2. 적절한 initialize 테크닉.
+    3. batch normalization : batch norm은 딥네트워크의 train을 강조한논문이다. 
+
+  * activation(활성화) : 입력신호의 총합을 출력신호로 변환하는 함수
+
+- Initialization Under ReLU Activation
+: 30개의 layer를 쌓으면 converage할수도있지만 안할수도있다.그래서 이런문제가있으니 batch normalization이 나왔다.
+
+
+
+
+
 DenseNet, SENet, EfficientNet
 Efficient CNN: SqueezeNet, ShuffleNet, MobileNet
 Vision Transformer 1: Self-attention
