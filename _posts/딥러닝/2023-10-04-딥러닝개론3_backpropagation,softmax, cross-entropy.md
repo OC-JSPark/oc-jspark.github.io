@@ -1,11 +1,11 @@
 ---
-title: "딥러닝개론 3"
-escerpt: "딥러닝 개론 공부"
+title: "딥러닝개론3 : backpropagation,softmax, cross-entropy"
+escerpt: "backpropagation,softmax, cross-entropy"
 
 categories:
   - DeepLearning
 tags:
-  - [AI, DeepLearning]
+  - [AI, DeepLearning,backpropagation,softmax, cross-entropy]
 
 toc: true
 toc_sticky: true
@@ -39,6 +39,11 @@ comments: true
 - 그 cost를 **역전파**시켜서 모델에 학습시켜서 모델이 조금더 좋은 예측을 하게 하는 거로 update시킨다. 이때, **역전파시켜서 변화되는건 모델의 가중치 부분이 update되는것이다.**
 
 - 가중치 matrix안의 숫자들을 바꾸는것이다. 
+  - 첫번째 가중치는 feature가 3개이기 때문에 3개의 input이 있고 5개의 output이 있는 matrix이다.(3x5 matrix)
+    - feature는 행을 의미한다.
+    - node수는 열을 의미한다.
+  - 그러면 input data가 2개였기 때문에 output도 2개의 data와 5개의 feature가 나온다.
+
 - 가중치를 업데이트하는 기준은 optimizer를 사용하든, 다양한 방법이 있다.
 - 기본적으로 gradient descent방법사용한다고 하면, 
   - w1 = w0 - α(∂C/∂w0) 
@@ -212,24 +217,6 @@ loss.backward()           ## loss.backward() : 역전파가 실행된다.
 - 이러한 이유로 cross entropy를 사용해서 classification 문제에서 다양한 확률값을 output으로 하는 모델에서 p라는 예측값과 q라는 정답값의 분포를 비교해서 정보량의 평균을 계산해서 분포간의 차이(차이가 클때 cost가 커져야 하기때문에) 그러한 맥락으로 우리는 cross entropy를 사용하여 cost를 계산하고 classification문제에서 가중치를 업데이트하는데 사용된다.
 
 
-
-
-CNN
-# 1. Overview
-# 2. 이미지필터(filters)
-# 3. 합성곱 연산1 (convolution)
-# 4. 합성곱 연산2 (convolution)
-# 5. CNN 1 (convolutional neural networks)
-# 6. CNN 2 (convolutional neural networks)
-# 7. CNN 역전파
-# 8. CV Task - 이미지분류(image classification)
-# 9. CV Task - 객체검출(object detection)
-# 10. CV Task - 객체추적(object tracking)
-# 11. CV Task - 영역분할(segmentation)
-# 12. 이미지 전처리(preprocessing)
-# 13. 데이터 불균형(imbalance)
-# 14. 오버피팅(overfitting)
-# 15. 이미지증강(augmentation)
 
 
 

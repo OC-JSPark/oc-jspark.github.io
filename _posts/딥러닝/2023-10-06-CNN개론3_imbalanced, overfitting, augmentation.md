@@ -1,11 +1,11 @@
 ---
-title: "CNN개론 3"
-escerpt: "CNN 개론 공부"
+title: "CNN개론3 : imbalanced, overfitting, augmentation"
+escerpt: "imbalanced, overfitting, augmentation"
 
 categories:
   - DeepLearning
 tags:
-  - [AI, DeepLearning, CNN]
+  - [AI, DeepLearning, imbalanced, overfitting, augmentation]
 
 toc: true
 toc_sticky: true

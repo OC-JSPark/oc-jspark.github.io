@@ -1,11 +1,11 @@
 ---
-title: "CNN개론 1"
+title: "CNN개론1 : convolution"
 escerpt: "CNN 개론 공부"
 
 categories:
   - DeepLearning
 tags:
-  - [AI, DeepLearning, CNN]
+  - [AI, DeepLearning, CNN, convolution]
 
 toc: true
 toc_sticky: true
@@ -25,10 +25,15 @@ comments: true
 ## 1-1. pixel
 : 이미지의 최소한의 단위
 
+- image grayscale(흑백)
+
+![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/513bbefa-fc3d-4e33-94e5-ca0b230cc2f3)
+
 - pixel value
 : 0(흑) ~ 255(백)
 
   - 0~255 -> 0~1 로 **normalization** 하는경우도 있다.
+    - 모든 pixel의 값을 255로 나눠주면 된다.
 
 ## 1-2. RGB
 : image는 3channel이 있다.(R,G,B)
@@ -71,19 +76,19 @@ comments: true
   - solution) 그래서 cnn기법을 활용하여 region정보도 신경망 모델에 입력시켜서 최종적으로 예측할수 있게 진행되었다.
 
 ## 2-2. cnn에서의 이미지 입력
-: 각 pixel의 정보를 그대로 사용하는것이 아니라, region정보를 하나의 특성으로 사용하고 싶다. 그러기 위해 어떠한 필터를 사용하여 연산하여 region정보가 포함된 압축된 feature를 만들고 이를 input neural network에 넣을것이다.  
+: 각 pixel의 정보를 그대로 사용하는것이 아니라, region정보를 하나의 특성으로 사용하고 싶다. 그러기 위해 어떠한 필터를 사용하여 연산하여 region정보가 포함된 **압축된 feature**(하나의 pixel을 의미하는게 아님)를 만들고 이를 input neural network에 넣을것이다.  
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/f4544d54-2888-40ee-b0b2-9d56d86ffc03)
 
   - layer가 깊어질수록 region의 size가 증가하게 된다.
-  - 즉, 우리는 input image의 region 정보를 충분히 활용해서 convolution 연산을 통해서 지역적인 정보를 추출해서 다음 layer로 압축한 정보를 넘겨주게 되고 그것을 가중합을 통해서 feature를 생성하고 이런한 과정을 반복한 다음에 최종적으로 굉장히 상세하고, 많은 정보를 담고있는 feature를 활용해서 예측을 진행하게 된다.
+  - 즉, **우리는 input image의 region 정보를 충분히 활용해서 convolution 연산을 통해서 지역적인 정보를 추출해서 다음 layer로 압축한 정보를 넘겨주게 되고 그것을 가중합을 통해서 feature를 생성하고 이런한 과정을 반복한 다음에 최종적으로 굉장히 상세하고, 많은 정보를 담고있는 feature를 활용해서 예측을 진행하게 된다.**
 
 - cnn에서의 이미지 입력 workflow 
   - 1) pixel matrix 만든다 
   : input image를 normalization을 활용하여 0~1 사이의 matrix를 만든다. 그리고 grayscale(흑백) 으로 설정한다.
 
   - 2) convolution 진행한다 
-  : input image에 3x3 filter를 적용하여 연산시킨다. 즉, input image에 해당 region의 3x3 filter를 통해서 연산을 통해 나온 압축된 정보를 의미한다.
+  : input image에 3x3 filter를 적용하여 연산시킨다. 즉, input image에 해당 region의 3x3 filter를 통해서 연산을 통해 나온 **압축된 정보**를 의미한다.
 
 
 ## 2-3. padding
@@ -93,7 +98,8 @@ comments: true
 
 1. 이를 통해 convolution layer의 출력 데이터의(feature map) 사이즈 조절 가능
 2. 외곽을 "0"값으로 둘러싸는 특징으로 부터 인공 신경망이 이미지의 외각을 인식하는 학습효과도 있음.
-3. input size와 output size(feature map) 를 동일한 size로 조절가능
+3. **input size와 output size(feature map) 를 동일한 size로 조절가능**
+  - channel수 = 사용되는 filter의 수
 
 ## 2-4. stride(=window)
 : filter(kernel)가 지정된 간격으로 image를 순회하는 간격을 stride라고 한다.
@@ -122,6 +128,8 @@ comments: true
 ## 3-2. channel
 : 필터를 몇개 사용하는지에 따라서 몇개의 output이 나오게 되고 그것이 출력되는 channel수가 된다.
 
+  - input 이미지에 filter 3개를 적용하여 관련 feature를 뽑개되면 3개의 feature가 뽑히며, 그것이 바로 3개의 feature map이 된다. 
+
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/a5e5b9ad-42f9-4d95-803a-6dfec2fec0f0)
 
   - (c,w,h) : channel ,width, hegith
@@ -130,10 +138,11 @@ comments: true
 
   - padding을 줫다고 가정했기 떄문에 전체적인 size(256x256)는 변하지 않음.
 
-|channel 수|의미|
-|---|---|
-|1|grayscale(흑백)|
-|3|rgb|
+
+  |channel 수|의미|
+  |---|---|
+  |1|grayscale(흑백)|
+  |3|rgb|
 
 
 ## 3-3. Max pooling
@@ -152,6 +161,16 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/d1a9ff55-dee0-45b5-9b6b-bd693fc10b2f)
 
+  - channel기준으로 해석해보기
+    - input : 3channel (RGB)
+    - 1 layer : 64 channel 
+      - filter개수가 64개 사용됨을 의미.
+    - 2 layer : max pooling 1번, 128 channel
+      - w,h 가 1/2씩 줄어듬.
+      - filter가 128개짜리 사용됨
+    - 마지막 layer (1 x 1 x 1000) : 1000 channel = 1000개의 classification
+      - 이후 softmax를 통해서 확률값으로 변환하고 classification task를 수행하는 모델이 된다.
+      - = fc(fully connected) layer = flatten layer(한줄로 폈기 때문)라고 한다.
 
 ## 3-5. 신경망 vs cnn
 
