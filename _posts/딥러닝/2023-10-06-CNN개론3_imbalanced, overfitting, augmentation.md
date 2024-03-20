@@ -37,11 +37,11 @@ comments: true
 ## 10-2. class imbalance 해결법
 - 1) oversampling 
 : 단순히 data 중복 복제하는기법
-  - 데이터 양만 증가, 다양성은 x. 
+  - **데이터 양만 증가, 다양성은 x.**
   - 만약 다양성이 충분히 확보된 dataset이라면 oversampling하여도 효과를 볼수 있다.
 
 - 2) Data augmentation
-: data의 다양성을 증가시키기 위해!, 성능은 늘어날 확률이 적다.
+: **data의 다양성을 증가시키기 위해!**, 성능은 늘어날 확률이 적다.
 
 
 - image를 pre-process 할때 다양한 transformation(변화)을 진행한다. 
@@ -114,12 +114,12 @@ comments: true
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/f71a8c75-2b4d-406a-bd14-a2e9150f8004)
 
   - 일반적으로 연산이 진행될때 loss가 구해진다. 이 loss의 총합이 cost이다. 
-  - cost를 계산할때 람다는 상수로 생각.
-  - w² = weight² 을 의미한다. 절대값을 사용해도 된다.
-    - || : 절대값 = L1
-    - 제곱 : L2라고 표현한다.
-  
-  - **""loss = 예측-정답 차이이다."" 이것을 낮추는것이 학습의 목적이다!!**
+    - 람다 : 상수로 생각.
+    - w² = weight² 을 의미한다. 절대값을 사용해도 된다.
+      - 절대값 : L1 normalization
+      - 제곱 : L2 normalization라고 표현한다.
+    
+  - **"loss = 예측-정답 차이이다." 이것을 낮추는것이 학습의 목적이다!!**
 
   - weight를 loss에 포함시킨다. 왜?
     - loss+weight를 추가한다면 낮추는게 목적에 어긋나는거 아닌가?
@@ -141,21 +141,29 @@ comments: true
 
   - 이것이 왜 일반화의 개념이 되는가?
     - 해당 모델이 너무 특정 가중치와 특정 특성에 학습된거면 문제가 될 수 있다. 이러한부분을 일부러 누락시킨다면 너무 특정 feature에 의존하며 판단하는 오버피팅기능을 없앨수 있으며, 전반적으로 다양한 특성을 활용하면서 일반화된 성능을 낼수 있는 모델이 만들어 질 수 있다.
-    - 학습을 너무 가속화하는게 아니라 학습에 방해되는 요소들을 조금씩 추가하는 방식으로 학습이 우리 dataset 뿐만아니라 real data를 포함할수 있는 model이 될수 있다.
+    - 학습을 너무 가속화하는게 아니라 학습에 방해되는 요소들을 조금씩 추가하는 방식으로 학습이 우리 dataset 뿐만아니라 real data를 포함할수 있는 일반화된 model이 될수 있다.
 
 
 # 12. 이미지증강(augmentation)
 
+- data imbalanced issue를 해결하기 위해서 transformation(변환)을 통해서 original image를 일정한 확률로 발생시킨 다음에 model의 input으로 넣어준다.
+- 이러한 변화를 통해서 dataset의 다양성한계를 극복하고, real data를 더 포함시키는 방향으로 가기 위함이다. 
+
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/be2c7dbc-185d-43b2-956b-c31f8147a2c3)
 
-  - flip : 좌우상하,roate(회전) 
+
+  - flip : 좌우상하,rotate(회전) 
   - blur : 흐리게
   - HueSaturationValue : 휴(색조,색상) + 채도:색의 선명도 를 random하게!
   - GaussNoise : noise를 추가한것. ex)film효과
   - CoarseDropout(=erasing = cutout) : 특정영역을 잘라낸것. 
   - Gray : 3채널에서 1채널로 변환하기
     -  original image 뿐만아니라 gray 도 넣기 떄문에 data다양성측면에서 훨씬 좋다.
-    - gary는 r,g,b 채널의 값들을 일정한 연산을 통해서 하나의 채널로 변환한것. 그러므로 rgb 채널보다 적은 정보를 갖고있다라고 판단하는건 어렵다. 그러므로 정보손실이 아닌 정보의 다양성측면에서 봐야한다.
+    - gary는 r,g,b 채널의 값들을 일정한 연산을 통해서 하나의 채널로 변환한것. 그러므로 rgb 채널보다 적은 정보를 갖고있다라고 판단하지 말것! 그러므로 정보손실이 아닌 정보의 다양성측면에서 봐야한다.
+
+![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/3c067144-af3f-4ad8-bf65-defa58474f65)
+
+  - 참고자료 [논문 : YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/abs/2004.10934)
 
   - MixUp : 두사진에 일정한 값을 곱해서 하나의 사진으로 만든것
   - CutMix : Cut 하고 Mix한것
@@ -165,12 +173,19 @@ comments: true
 
 - 이런 image augmentation한것은 실제로 input에 들어갈떄는 일정한 확률로 곱해지는 것이다. 즉, transformation 된게 다 들어가는게 아니라 random으로 input에 들어가는경우, 안들어가는경우 등이 생긴다.
 
+- **즉, 우리는 데이터셋을 먼저 파악후, task가 무엇인지 알아야 한다. 그리고 inference에서 문제될 소지가 무엇이 있는지, 우리가 수집한 데이터의 한계, 우리가 원하는 일반화 model의 level 등을 고민하고 augmentation을 진행해야 한다.**
+
 ## 12-1. GAN(Generative Adversarial network, 생성적적대신경망)
 
-- 참고자료
-  - [DATA AUGMENTATION GENERATIVE ADVERSARIAL NETWORKS 논문](https://arxiv.org/abs/1711.04340)
+![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/b228b32e-158e-4da5-810b-d128ebdf4ccb)
 
-- random한 noise image를 input을 받아서 fake와 real 데이터에 대해 차이값을 개선해나가는 모델. output이 real이라면 fake 가중치를 real로 맞춰나간다. 즉 G모델은 D모델을 속이고 싶어한다.
+- 참고자료[논문 :Data Augmentation Generative Adversarial Networks](https://arxiv.org/abs/1711.04340)
+
+- 생성적 적대 신경망
+
+- random한 noise image를 input을 받아서(Generator model) fake와 real 데이터에 대해 차이값(Discrimator model)을 개선해나가는 모델. 
+  - 모델(fake인지 real인지 분류하는 모델)의 output이 real image를 맞추었다면, generator model은 해당 real image와 fake image의 차이를 loss로 계산해서 학습하게 된다. 즉, 조금더 real image에 가까워 지도록 생성하는것. 
+  - output이 real이라면 fake 가중치를 real로 맞춰나간다. 즉 G모델은 D모델을 속이고 싶어한다.
 
 - GAN으로 만든 생성이미지 dataset을 기존 dataset에 추가한다면 dataset이 증가되기 때문에 augmentation이라 한다.
 
