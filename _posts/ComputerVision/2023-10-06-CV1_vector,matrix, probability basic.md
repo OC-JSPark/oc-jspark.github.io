@@ -1,11 +1,11 @@
 ---
-title: "Computer Vision 기본이론 1"
+title: "CV1 : vector,matrix, probability basic"
 escerpt: "Computer Vision 기본이론 1"
 
 categories:
   - Vision
 tags:
-  - [AI, Vision]
+  - [AI, Vision, vector,matrix, probability basic]
 
 toc: true
 toc_sticky: true
@@ -91,9 +91,11 @@ comments: true
   - lens = cornea(각막)
   - aperture(조리개) = pupil(홍채,동공)
   - lens = lens(망막)
+  - 각막에서 빛의 각도를 굴절시켜, 망막에서 해당 빛의 초점을 맞추는곳!
 
 
-# 2. Linear algebra basic: vector and Matrix : vector와 matrix는 이미지의 기본적인 structure이다. 이미지도 결국 rgb와 wbg를 가진 matrix의 tensor의 연속이다.그것을 사용해서 어떻게 연산할지
+# 2. Linear algebra basic: vector and Matrix 
+: vector와 matrix는 이미지의 기본적인 structure이다. 이미지도 결국 rgb와 wbg를 가진 matrix의 tensor의 연속이다.그것을 사용해서 어떻게 연산할지
 
 ## 2-1. Linear Algebra in Computer Vision
 : 벡터와 행렬의 연산만 알아도 된다. 
@@ -122,6 +124,7 @@ comments: true
   - 그래서 decision boundary를 찾으면 사람인지 아닌지를 판단하는 함수 f(x)를 찾는게 컴퓨터비전의 목표이다.
 
 ### 2-1-3. vector space의 수학적 개념에 대한 정리
+
 - Frequently used in
   - Image description
   : vector space라는 개념은 image description에 사용함
@@ -153,15 +156,21 @@ comments: true
 - inner product(내적)
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/c31b341d-adeb-4259-b52b-5f2639929808)
+  
+  - 대칭적, 분배, 선형성보장,  내적된 결과는 항상 0보다 크다.
 
 - outer product(외적)
+
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/e8fad84d-5e12-4b2d-9332-907609720663)
 
-### 2-2-2. Norm
+  - 외적을 하게 되면 matrix가 나오게 된다.
+
+### 2-2-2. Vector Norm
 : vector의 length를 말한다.
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/04f4c1ff-5026-4958-89f1-3a204e261bbc)
 
+  - 2-norm = Magnitude와 같은 의미.
   - p-norm : element에 대해서 x에 p를 제곱한다음에 더한 후 전체를 1/p 하는것
 
 |norm|그래프에서의 특징|
@@ -179,6 +188,8 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/bccf91e8-34a9-4528-bbce-81993ab786b0)
 
+  - linearly dependent : x2를 x1과 x3의 덧셈과 스칼라곱으로 표현할수 있는경우.
+  - linearly independent :  x1,x2,x3가 직교하고 있을때는 아무리 더해도 벡터가 x를 각각 만들수 없는 경우.
 
 ### 2-2-4. Basis(베이시스)
 : 서로 직교하는 linear independant한 vector들로 구성된 set을 basis set이라고 한다.
@@ -201,11 +212,12 @@ comments: true
 
   - Identity matrix: 대각선의 값들이 모두 1이고 나머지는 0인경우
 
-### 2-3-1. Oprations
+### 2-3-1. Matrix Oprations
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/aece6d22-da4b-40c6-b2c4-d670de4c6843)
 
   - Transpose : 행 vector <-> 열 vector change
+    - 행,열 바꿔주기역할이다.
 
 ### 2-3-2. Rank
 : 행렬에서 선형독립적인 row or columns 의 수 = basis의 개수
@@ -235,8 +247,8 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/a1fa75bb-07c1-4460-96c8-05c1b40bb04a)
 
-  - sinular하다면 determinant=0 이다. 반대도 성립가능.(왜? 분모에 0값이 들어가면 값을 구할수 없기 때문에.)
-
+  - singular하다면 determinant=0 이다. 반대도 성립가능.(왜? 분모에 0값이 들어가면 값을 구할수 없기 때문에.)
+  - python에서는 numpy에서 linear algebra 라이브러리 사용하면 된다.
 
 ### 2-3-4. Inverse Matrix
 : 2가지 조건을 가져야한다. squre(NxN 형태)형태 + non-sinular matrix여야 한다.(모든 basis값이 matrix와 같아야 한다.)
@@ -252,6 +264,8 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/2891950e-0b1e-4664-92a6-eff46c43adab)
 
+  - ad-bc =0 이면 정답을 구할수 없다.
+  - singular vector : 2개의 벡터로 이루어진것을 말한다.
   - non-singular : scalar value로 서로를 표현할수 없기 때문에 x,y축으로 2개의 basis로 나누어 진다. 즉, ad-bc=넓이가 determinant value가 된다.
 
 ## 2-4. Eigen Decomposition
@@ -259,16 +273,16 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/07f5105b-5c2c-4eb1-9ea3-b219e0f01b13)
 
-  - eigenvector : 고유벡터
-  - eigenvalue : 고유값
+  - eigenvector : 고유벡터(x)
+  - eigenvalue : 고유값(람다)
 
-  - suqare matrix A가 있다면 (N x N행렬) 람다는 어떤 상수이고, non-zero vector x가 있다면, Ax = 람다x가 성립되면 람다를 eigenvalue라 하고 x를 eigenvector라고 한다.(x는 matrix형태겠군.)
+  - suqare matrix A가 있다면 (N x N행렬) 람다는 어떤 상수이고, non-zero vector x가 있다면, Ax = 람다x가 성립되면 람다를 eigenvalue라 하고 x를 eigenvector라고 한다.(A는 matrix형태겠군.)
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/fe5e516c-4ce2-4942-a9ac-93de39c07031)
 
   - V : eigenvector들을 가지고 있는 orthonormal matrix
-    - 각각은 서로 직교하고 eigenvector들로 이루어져있다
-  - D : diagonal matrix
+    - 각각은 서로 직교(orthonormal)하고 eigenvector들로 이루어져있다
+  - D : diagonal matrix (대각선만있는 매트릭스)
   - Eigen 성질
     - eigenvalue에 하나라도 0이 있으면 square matrix는 singular이다.
     - 대각행렬이 모두 positive value면 A의 matrix는 positive로 정의됨.반대면 모두 negative이다.
@@ -281,7 +295,8 @@ comments: true
 
 
 
-# 3. Probability basic : Random variable nad Bayes :  대부분의 머신러닝들을 확률기반이다. 알수없는 사건에 대해서 판단 하는데 필요함
+# 3. Probability basic : Random variable nad Bayes 
+:  대부분의 머신러닝들을 확률기반이다. 알수없는 사건에 대해서 판단 하는데 필요함
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/94b19a82-18b9-4231-8e00-b35813b143fe)
 
@@ -294,7 +309,7 @@ comments: true
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/66e81a4f-c334-49ee-af70-60b2458d4da0)
 
-  - sample space : 실험에서 사건이 일어날수 있는 확률
+  - sample space(오메가) : 실험에서 사건이 일어날수 있는 확률
   - random variable : 값을 할당해주는 함수, random variable은 확률이 아니라 변수일뿐이다.사건을 수치화시켜주는 함수.
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/02ccef19-1af8-47c7-93e2-e320171445d8)
@@ -311,6 +326,7 @@ comments: true
   : A가 B에 속하는 사건이라면 A의 확률은 B의 확률보다 무조건 작거나같다.
   - Complement (여집합)
   - Notation(교집합)
+  - independence(독립)
 
 ## 3-3. Conditional Probability
 : 조건확률
@@ -320,7 +336,7 @@ comments: true
 - B가 주어졌을때 A가 일어날 확률
   - 비가 오고 해가뜰확률 = 해뜰확률 x 해가 떠있는데 비가 올 확률
 
-## 3-4. Bayes'Theorem
+## 3-4. Bayes'Theorem(베이즈 이론)
 
 ![image](https://github.com/OC-JSPark/oc-jspark.github.io/assets/46878973/96a47b74-2a1b-48d9-9ef9-6730baa5868b)
 
