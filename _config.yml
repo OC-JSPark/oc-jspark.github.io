@@ -96,7 +96,7 @@ analytics:
 author:
   name             : "박준성"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "인공지능, Devops tech Blog."
+  bio              : "Tech Study Blog."
   location         : "Seoul, Korea"
   email            : "bti8coc@gmail.com"
   links:
@@ -207,7 +207,8 @@ sass:
 
 
 # Outputting
-permalink: /:categories/:title/
+# permalink: /:categories/:title/
+permalink: /:categories/:year/:month/:day/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
