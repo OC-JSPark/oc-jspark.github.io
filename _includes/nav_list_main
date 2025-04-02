@@ -16,25 +16,72 @@
       <li>
         <!--span 태그로 카테고리들을 크게 분류 ex) C/C++/ -->
         
-        <span class="nav__sub-title">DevOps</span>
+        <span class="nav__sub-title"> Cloud & 가상화</span>
             <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
             <ul>
                 <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/cpp 주소의 글로 링크 연결-->
                 <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시--> 
                 {% for category in site.categories %}
                     {% if category[0] == "Openstack" %}
-                        <li><a href="/categories/Openstack" class=""> devops IaaS:Openstack ({{category[1].size}})</a></li>
+                        <li><a href="/categories/Openstack" class=""> Cloud : Openstack ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Kubernetes" %}
-                        <li><a href="/categories/Kubernetes" class=""> devops CaaS: Kubernetes ({{category[1].size}})</a></li>
+                        <li><a href="/categories/Kubernetes" class=""> Cloud : Kubernetes ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-        <span class="nav__sub-title"> Development </span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Docker" %}
+                        <li><a href="/categories/Docker" class=""> 가상화 : Docker ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        <span class="nav__sub-title"> 버전관리 & 협업업 </span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Git" %}
+                        <li><a href="/categories/Git" class=""> Git 기초 및 활용 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Github" %}
+                        <li><a href="/categories/Github" class=""> Github 사용법 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        <span class="nav__sub-title"> CS & system </span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "System" %}
+                        <li><a href="/categories/System" class=""> 컴퓨터구조 & 운영체제({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Network" %}
+                        <li><a href="/categories/Network" class=""> 네트워크 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Linux" %}
+                        <li><a href="/categories/Linux" class=""> Linux ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        <span class="nav__sub-title"> Fullstack </span>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Python" %}
@@ -52,27 +99,12 @@
 
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Git" %}
-                        <li><a href="/categories/Git" class=""> Git & GitHub ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
-            <ul>
-                {% for category in site.categories %}
                     {% if category[0] == "Frontend" %}
                         <li><a href="/categories/Frontend" class=""> Web & Frontend ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-        <span class="nav__sub-title"> 운영체제 </span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Linux" %}
-                        <li><a href="/categories/Linux" class=""> Linux ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        
         <span class="nav__sub-title"> AI </span>
             <ul>
                 {% for category in site.categories %}
@@ -99,6 +131,13 @@
                 {% for category in site.categories %}
                     {% if category[0] == "Recommand" %}
                         <li><a href="/categories/Recommand" class=""> 추천시스템 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "LLM" %}
+                        <li><a href="/categories/LLM" class=""> LLM ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
