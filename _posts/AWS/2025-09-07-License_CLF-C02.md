@@ -1,19 +1,19 @@
 ---
-title: "Docker-compose이용"
-escerpt: "Dcoker"
+title: "AWS Certified Cloud Practitioner"
+escerpt: "CLF-C02"
 
 categories:
-  - Docker
+  - AWS
 tags:
-  - [Docker, Dockerfile]
+  - [AWS, License]
 
 toc: true
 toc_sticky: true
 
 breadcrumbs: true
 
-date: 2025-08-07
-last_modified_at: 2025-08-07
+date: 2025-09-07
+last_modified_at: 2025-07-07
 
 comments: true
 
