@@ -41,7 +41,15 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-        <span class="nav__sub-title"> 버전관리 & 협업 </span>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "AWS" %}
+                        <li><a href="/categories/AWS" class=""> AWS ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        <span class="nav__sub-title"> 버전관리 & 협업 & Tools </span>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Git" %}
@@ -56,6 +64,16 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Tools" %}
+                        <li><a href="/categories/Tools" class=""> Tools ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+
         <span class="nav__sub-title"> CS & system </span>
             <ul>
                 {% for category in site.categories %}
@@ -141,13 +159,8 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-        <span class="nav__sub-title"> Tools </span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Tools" %}
-                        <li><a href="/categories/Tools" class=""> Tools ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
+
+
             </ul>
       </li>
   </ul>
